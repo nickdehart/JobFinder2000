@@ -22,7 +22,7 @@ class JobSpider(scrapy.Spider):
    def parse(self, response):
       client = MongoClient()
       db = client.Jobs
-      collection = db.applications
+      collection = db.listings
       
       for row in response.css('body div.container div.snippet-hidden div.main-columns div div.js-search-results div.listResults div'):
          href = row.css('div.-job-summary div.-title h2 a::attr(href)').get()
@@ -33,29 +33,11 @@ class JobSpider(scrapy.Spider):
             href = ''
             jobId = ''
 
-         tags = row.css('div.-job-summary div.-tags a::text').getall()
-         correct_tags = self.check_tags(tags)
-
-         perks = self.remove_whitespace(row.css('div.-job-summary div.-perks span::text').getall())
-         correct_salary = self.check_salary(perks)
-
          previous = collection.find_one({'jobId': jobId})
-         
-         if jobId and correct_tags and correct_salary and not previous:
+
+         if jobId and not previous:
             try:
-               res = requests.post('https://stackoverflow.com/jobs/apply/' + jobId, data={
-                  'fkey': '16d4aa61029d516e966446f949043bf7cc801668ff530df580d3d8e82fac2640',
-                  'sid': '0',
-                  'JobId': '307459',
-                  'CandidateName': 'Nicholas+DeHart',
-                  'CandidateLocation': 'Honolulu%2C+HI%2C+USA',
-                  'CandidateEmail': 'nickdehart%40gmail.com',
-                  'CandidatePhoneNumber': '7724033834',
-                  'qqfile': '',
-                  'SaveResumeToJobPreferences': 'false',
-                  'IsSavedResumeVisibleToEmployers': 'false',
-                  'CoverLetter': 'Please+take+a+look+at+a+few+projects+I+have+worked+on+here.+https%3A%2F%2Fwww.slideshare.net%2Fsecret%2FpLtMbrANEwP3zj+Please+download+to+view+.gifs+instead+of+flattened+web+view.'
-               })
+               res = requests.get('https://stackoverflow.com/jobs/apply/' + jobId)
             except Exception as e:
                self.log(e)
 
@@ -64,10 +46,11 @@ class JobSpider(scrapy.Spider):
                   'jobId': jobId,
                   'title': row.css('div.-job-summary div.-title h2 a::text').get(),
                   'href': href,
-                  'tags': tags,
-                  'perks': perks,
+                  'tags': row.css('div.-job-summary div.-tags a::text').getall(),
+                  'perks': self.remove_whitespace(row.css('div.-job-summary div.-perks span::text').getall()),
                   'timestamp': datetime.now(),
-                  'applied': res.status_code
+                  'applied': False,
+                  'external': True if res.status_code == 404 else False
                } )
             except Exception as e:
                self.log(e)
