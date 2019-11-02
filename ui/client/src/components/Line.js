@@ -14,7 +14,7 @@ export default class LineGraph extends PureComponent {
         <ResponsiveContainer>
           <LineChart data={data}>
             <Line isAnimationActive={false} type="monotone" dataKey="count" stroke="#8884d8" strokeWidth={2} />
-            <XAxis dataKey="date" hide={true}/>
+            <XAxis dataKey="date2" hide={true}/>
             <Tooltip />
           </LineChart>
         </ResponsiveContainer>

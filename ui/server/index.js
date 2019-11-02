@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
@@ -62,9 +65,13 @@ app.get('/time_data', (req, res) => {
 
   aggregateDocuments(agg, function(docs) {
     docs.forEach((element) => {
-      element.date = new Date(`${element._id.year}-${element._id.month}-${element._id.day}T00:00:00`);
+      let year = element._id.year;
+      let month = element._id.month > 9 ? element._id.month : '0' + element._id.month;
+      let day = element._id.day > 9 ? element._id.day : '0' + element._id.day;
+      element.date = new Date(`${year}-${month}-${day}T00:00:00`);
+      element.date2 = `${month}/${day}/${year}`
     })
-    res.send(docs)
+    res.send(docs.sort((a,b) => {return a.date - b.date}))
   });
 });
 
@@ -92,6 +99,40 @@ app.get('/type_data', (req, res) => {
     res.send(docs)
   });
 });
+
+app.post('/applied', (req, res) => {
+  let query = {
+    query: req.body,
+    update: {
+      $set: { 'applied': true }
+    }
+  }
+
+  updateDocuments(query, function(response) {
+    if(response)
+      res.sendStatus(200)
+    else
+      res.sendStatus(500)
+  });
+})
+
+const updateDocuments = function(query, callback) {
+  MongoClient.connect(url, function(err, client) {
+    assert.equal(null, err);
+  
+    const db = client.db(dbName);
+
+    const collection = db.collection('listings');
+    collection.updateOne(query.query, query.update)
+    .then(response => {
+      callback(response)
+    })
+    .catch(err => {
+      console.log('Error: ' + err)
+      callback(false)
+    })
+  });
+}
 
 const findDocuments = function(query, callback) {
   MongoClient.connect(url, function(err, client) {
@@ -122,8 +163,5 @@ const aggregateDocuments = function(agg, callback) {
     });
   });
 }
- 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
