@@ -15,6 +15,7 @@ export default function ApplyModal({props}) {
   };
 
   const apply = async () => {
+    handleClose()
    try {
       const response = await axios.post('/applied', {
          jobId: props.original.jobId,
@@ -23,7 +24,6 @@ export default function ApplyModal({props}) {
     } catch (error) {
       console.error(error);
     }
-    handleClose()
   };
 
   return (
