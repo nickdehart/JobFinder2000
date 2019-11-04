@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  PieChart, Pie, ResponsiveContainer, Tooltip, Cell
+  PieChart, Pie, ResponsiveContainer, Tooltip, Cell, Legend
 } from 'recharts';
 import Paper from '@material-ui/core/Paper';
 
@@ -43,6 +43,7 @@ export default class PieGraph extends PureComponent {
               }
             </Pie>
             <Tooltip />
+            <Legend layout="vertical" align="right" />
           </PieChart>
         </ResponsiveContainer>
       </Paper>

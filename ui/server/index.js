@@ -17,7 +17,7 @@ const url = 'mongodb://localhost:27017';
 const dbName = 'Jobs';
 
 app.get('/documents', (req, res) => {
-  findDocuments({}, function(docs) {
+  findDocuments({'not_interested': {$ne: true}}, function(docs) {
     res.send(docs)
   });
 });
@@ -80,7 +80,8 @@ app.get('/type_data', (req, res) => {
     { $group: {
         _id: {
             external: "$external",
-            applied: "$applied"
+            applied: "$applied",
+            not_interested: '$not_interseted'
         },
         count: { $sum: 1 } 
     }}
@@ -105,6 +106,22 @@ app.post('/applied', (req, res) => {
     query: req.body,
     update: {
       $set: { 'applied': true }
+    }
+  }
+
+  updateDocuments(query, function(response) {
+    if(response)
+      res.sendStatus(200)
+    else
+      res.sendStatus(500)
+  });
+})
+
+app.post('/not_interested', (req, res) => {
+  let query = {
+    query: req.body,
+    update: {
+      $set: { 'not_interested': true }
     }
   }
 

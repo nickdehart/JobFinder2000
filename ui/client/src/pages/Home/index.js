@@ -28,6 +28,15 @@ class Home extends Component {
     get_Time_Data({});
     get_Type_Data({});
   }
+
+  getData = () => {
+    const { 
+      get_Documents, 
+      get_Type_Data 
+    } = this.props;
+    get_Documents({});
+    get_Type_Data({});
+  }
   
 render() {
   const { 
@@ -46,7 +55,7 @@ render() {
             <Pie data={type_data}></Pie>
           </div>
           <Paper>
-            <Table data={documents}></Table>
+            <Table data={documents} getData={this.getData}></Table>
           </Paper>
         </div>
       </div>
