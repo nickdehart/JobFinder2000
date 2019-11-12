@@ -46,7 +46,8 @@ class CVSpider(scrapy.Spider):
             'about': about,
             'remote': remote,
             'description': description,
-            'cv': cv
+            'cv': cv,
+            'company': company
          }
       } )
 

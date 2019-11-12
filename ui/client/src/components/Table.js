@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
-import { Paper } from '@material-ui/core';
-import ApplyModal from './ApplyModal';
+import { Paper, Button } from '@material-ui/core';
+import DetailModal from './DetailModal';
 
 class Table extends Component {
 
 stringContains = (filter, row) => {
   return row.title.toLowerCase().includes(filter.value.toLowerCase())
+}
+
+filterTags = (filter, row) => {
+  for(var i = 0; i < row.tags.length; i++){
+    if(row.tags[i].toLowerCase().includes(filter.value.toLowerCase())){
+      return true;
+    }
+  }
+  return false;
 }
 
 filterMethod = (filter, row) => {
@@ -66,9 +75,18 @@ render() {
    filterMethod: this.stringContains,
   },
   {
+    Header: 'Tags',
+    accessor: 'tags',
+    minWidth: 200,
+    Cell: props => <div style={{display: 'flex'}}>{props.value.slice(0, 3).map((entry, index) => 
+      <Button key={`tags-${index}`} style={{marginLeft: '5px', marginRight: '5px'}} variant="outlined" size='small'>{`${entry}`}</Button>
+    )}</div>,
+    filterMethod: this.filterTags,
+   }, 
+  {
    Header: 'Applied',
    accessor: 'applied',
-   maxWidth: 150,
+   maxWidth: 125,
    Cell: props => <span>{props.value ? 'True' : 'False'}</span>,
    filterMethod: this.filterMethod,
    Filter: this.filter
@@ -76,7 +94,7 @@ render() {
   {
    Header: 'Ext/Int',
    accessor: 'external',
-   maxWidth: 150,
+   maxWidth: 125,
    Cell: props => <span>{props.value ? 'External' : 'Internal'}</span>,
    filterMethod: this.filterMethod,
    Filter: this.externalFilter
@@ -84,11 +102,10 @@ render() {
   {
    Header: ' ',
    accessor: 'href',
-   maxWidth: 160,
-   Cell: props => <ApplyModal props={props} getData={getData}/>
+   maxWidth: 100,
+   Cell: props => <DetailModal props={props} getData={getData}/>
   }, 
 ]
-
 
     return (
       <div>
@@ -97,7 +114,7 @@ render() {
             data={data}
             columns={columns}
             showPageSizeOptions={false}
-            defaultPageSize={9}
+            defaultPageSize={8}
             sortable
             filterable
           />

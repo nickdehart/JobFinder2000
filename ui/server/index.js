@@ -158,7 +158,7 @@ const findDocuments = function(query, callback) {
     const db = client.db(dbName);
 
     const collection = db.collection('listings');
-    collection.find(query).toArray(function(err, docs) {
+    collection.find(query).sort({'timestamp': -1}).toArray(function(err, docs) {
       assert.equal(err, null);
       client.close()
       callback(docs);
