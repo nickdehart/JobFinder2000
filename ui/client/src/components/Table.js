@@ -75,7 +75,7 @@ render() {
    filterMethod: this.stringContains,
   },
   {
-    Header: 'Tags',
+    Header: 'First Three Tags',
     accessor: 'tags',
     minWidth: 200,
     Cell: props => <div style={{display: 'flex'}}>{props.value.slice(0, 3).map((entry, index) => 
