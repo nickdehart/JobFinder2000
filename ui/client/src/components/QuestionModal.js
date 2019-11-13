@@ -1,5 +1,4 @@
-import React from 'react';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Modal, Button, Paper } from '@material-ui/core';
 import axios from "axios";
 
@@ -30,7 +29,7 @@ export default function QuestionModal({props, getData}) {
 
   return (
     <Fragment>
-      <a href={props.value} rel="noopener noreferrer" target='_blank' style={{textDecoration: 'none'}}>
+      <a href={props ? props.value ? props.value : '' : ''} rel="noopener noreferrer" target='_blank' style={{textDecoration: 'none'}}>
         <Button style={{margin: '10px', backgroundColor: '#00C49F', color: 'white'}} variant="contained" color="inherit" onClick={handleOpen}>
             Check Out
         </Button>

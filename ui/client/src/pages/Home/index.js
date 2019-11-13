@@ -7,13 +7,13 @@ import { get_Tag_Data } from '../../store/reducers/tag_data';
 import { get_Time_Data } from '../../store/reducers/time_data';
 import { get_Type_Data } from '../../store/reducers/type_data';
 
-import Line from '../../components/Line'
-import Pie from '../../components/Pie'
-import Bar from '../../components/Bar'
-import Table from '../../components/Table'
+import Line from '../../components/Line.js'
+import Pie from '../../components/Pie.js'
+import Bar from '../../components/Bar.js'
+import Table from '../../components/Table.js'
 
 
-class Home extends Component {
+export class Home extends Component {
 
   componentDidMount() {
     const { 
@@ -50,12 +50,12 @@ render() {
       <div>
         <div style={{width: '95vw', height: '86vh', marginTop: '20px'}}>
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <Line data={time_data}></Line>
-            <Bar data={tag_data}></Bar>
-            <Pie data={type_data}></Pie>
+            <Line data={time_data ? time_data : []}></Line>
+            <Bar data={tag_data ? tag_data : []}></Bar>
+            <Pie data={type_data ? type_data : []}></Pie>
           </div>
           <Paper>
-            <Table data={documents} getData={this.getData}></Table>
+            <Table data={documents ? documents : []} getData={this.getData}></Table>
           </Paper>
         </div>
       </div>

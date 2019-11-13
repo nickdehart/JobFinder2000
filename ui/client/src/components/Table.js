@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import { Paper, Button } from '@material-ui/core';
-import DetailModal from './DetailModal';
+import DetailModal from './DetailModal.js';
 
 class Table extends Component {
 

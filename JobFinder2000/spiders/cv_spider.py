@@ -30,7 +30,21 @@ class CVSpider(scrapy.Spider):
       for section in response.css('body div.container div.snippet-hidden div.main-columns div.job-details--content div.nav-content section'):
          try:
             section_name = section.css('h2::text').get()
+            if not section_name:
+               self.collection.update_one( { 'jobId': response.url.split('/')[-2] }, {
+               '$set': {
+                  'cv': 'Not Available',
+                  'company': company if company else 'Not Available'
+               }
+               } )
+               return
          except Exception as e:
+            self.collection.update_one( { 'jobId': response.url.split('/')[-2] }, {
+               '$set': {
+                  'cv': 'Not Available',
+                  'company': company if company else 'Not Available'
+               }
+            } )
             return
          if 'About' in section_name:
             about = self.about_section(section)

@@ -1,9 +1,8 @@
-import React from 'react';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Modal, Button, Paper } from '@material-ui/core';
-import CoverLetter from './CoverLetter';
+import CoverLetter from './CoverLetter.js';
 import axios from "axios";
-import QuestionModal from './QuestionModal';
+import QuestionModal from './QuestionModal.js';
 
 export default function DetailModal({props, getData}) {
   const [open, setOpen] = React.useState(false);
@@ -55,43 +54,43 @@ export default function DetailModal({props, getData}) {
         aria-describedby="simple-modal-description"
         open={open}
       >
-        <Paper style={{ top: '50%', left: '20%', width: '70%', transform: 'translate(20%, 20%)', padding: '20px'}} square>
-          <h2>{props.original.title}</h2>
-          {props.original.company && <h3>{props.original.company}</h3>}
-          <div style={{display: 'flex', justifyContent: 'space-around'}}>
-            <div style={{display: 'flex', width: '50%'}}>
-              <b>Perks:&nbsp;
-                {props.original.perks.map((entry, index) => 
-                  <Button key={`perk-${index}`} style={{margin: '5px'}} variant="outlined" size='small'>{`${entry}`}</Button>
-                )}
-                {props.original.perks.length === 0 && 'None'}
-              </b>
+          <Paper style={{ top: '50%', left: '20%', width: '70%', transform: 'translate(20%, 20%)', padding: '20px'}} square>
+          { props && props.original &&
+          <Fragment>
+            <h2>{props.original.title ? props.original.title : 'Not Available'}</h2>
+            {props.original.company && <h3>{props.original.company}</h3>}
+            <div style={{display: 'flex', justifyContent: 'space-around'}}>
+              <div style={{display: 'flex', width: '50%'}}>
+                <b>Perks:&nbsp;
+                  {props.original.perks && props.original.perks.map((entry, index) => 
+                    <Button key={`perk-${index}`} style={{margin: '5px'}} variant="outlined" size='small'>{`${entry}`}</Button>
+                  )}
+                  {props.original.perks.length === 0 && 'None'}
+                </b>
+              </div>
+              <div style={{display: 'flex', width: '50%'}}>
+                <b>Tags:&nbsp;
+                  {props.original.tags.map((entry, index) => 
+                    <Button key={`tag-${index}`} style={{margin: '5px'}} variant="outlined" size='small'>{`${entry}`}</Button>
+                  )}
+                  {props.original.tags && props.original.tags.length === 0 && 'None'}
+                </b>
+              </div>
             </div>
-            <div style={{display: 'flex', width: '50%'}}>
-              <b>Tags:&nbsp;
-                {props.original.tags.map((entry, index) => 
-                  <Button key={`tag-${index}`} style={{margin: '5px'}} variant="outlined" size='small'>{`${entry}`}</Button>
-                )}
-                {props.original.tags.length === 0 && 'None'}
-              </b>
+            <CoverLetter text={props.original.cv}/>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <QuestionModal props={props} getData={getData} />
+              <Button style={{margin: '10px', backgroundColor: '#FFBB28', color: 'white'}} variant="contained" color="inherit" onClick={notInterested}>
+                Not Interested
+              </Button>
+              <Button style={{margin: '10px', backgroundColor: '#FF8042', color: 'white'}} variant="contained" color="inherit" onClick={notAvailable}>
+                Not Available
+              </Button>
+              <Button style={{margin: '10px'}} variant="contained" color="secondary" onClick={handleClose}>
+                Maybe Later
+              </Button>
             </div>
-          </div>
-          <CoverLetter text={props.original.cv}/>
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-            {/* <Button style={{margin: '10px', backgroundColor: '#00C49F', color: 'white'}} variant="contained" color="inherit" onClick={handleClose}>
-               Check Out
-            </Button> */}
-            <QuestionModal props={props} getData={getData} />
-            <Button style={{margin: '10px', backgroundColor: '#FFBB28', color: 'white'}} variant="contained" color="inherit" onClick={notInterested}>
-               Not Interested
-            </Button>
-            <Button style={{margin: '10px', backgroundColor: '#FF8042', color: 'white'}} variant="contained" color="inherit" onClick={notAvailable}>
-               Not Available
-            </Button>
-            <Button style={{margin: '10px'}} variant="contained" color="secondary" onClick={handleClose}>
-               Maybe Later
-            </Button>
-          </div>
+          </Fragment>}
         </Paper>
       </Modal>
 
