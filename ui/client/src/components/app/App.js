@@ -24,7 +24,7 @@ render() {
               </p>
             </Link>
           </header>
-          <div className="App-content">
+          <div style={{padding: '20px'}}>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route component={NoMatch} />

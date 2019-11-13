@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
+import { Grid, Paper } from '@material-ui/core';
 
 import { get_Documents } from '../../store/reducers/documents';
 import { get_Tag_Data } from '../../store/reducers/tag_data';
 import { get_Time_Data } from '../../store/reducers/time_data';
 import { get_Type_Data } from '../../store/reducers/type_data';
 
-import Line from '../../components/line'
-import Pie from '../../components/pie'
-import Bar from '../../components/bar'
+import Chart from '../../components/chart'
 import Table from '../../components/table'
 
 
@@ -45,20 +43,21 @@ render() {
     time_data,
     type_data
   } = this.props;
-
+// style={{width: '95vw', height: '86vh', marginTop: '20px'}}
+// style={{display: 'flex', justifyContent: 'space-between'}}
     return (
-      <div>
-        <div style={{width: '95vw', height: '86vh', marginTop: '20px'}}>
-          <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <Line data={time_data ? time_data : []}></Line>
-            <Bar data={tag_data ? tag_data : []}></Bar>
-            <Pie data={type_data ? type_data : []}></Pie>
-          </div>
+      <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
+        <Grid container item spacing={2} >
+          <Chart data={time_data ? time_data : []} type='line' />
+          <Chart data={tag_data ? tag_data : []} type='bar' />
+          <Chart data={type_data ? type_data : []} type='pie' />
+        </Grid>
+        <Grid container item>
           <Paper>
             <Table data={documents ? documents : []} getData={this.getData}></Table>
           </Paper>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     );
   }
 }

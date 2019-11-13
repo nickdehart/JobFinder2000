@@ -1,18 +1,18 @@
 
-  .Line-preloader {
-   animation: Line-preloader-spin infinite 2s linear;
+  .Chart-preloader {
+   animation: Chart-preloader-spin infinite 2s linear;
    height: 15vmin;
    pointer-events: none;
  }
 
- .Line-preloader-container {
+ .Chart-preloader-container {
    position: relative;
    top: 50%;
    -ms-transform: translateY(-50%);
    transform: translateY(-50%);
  }
  
- @keyframes Line-preloader-spin {
+ @keyframes Chart-preloader-spin {
    from {
      transform: rotate(0deg);
    }

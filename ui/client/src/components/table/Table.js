@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
-import { Paper, Button } from '@material-ui/core';
+import { Paper, Button, Grid } from '@material-ui/core';
 import Detail from '../detail';
 
 class Table extends Component {
@@ -108,18 +108,18 @@ render() {
 ]
 
     return (
-      <div>
-        <Paper style={{marginTop: '20px'}} square>
+      <Grid container item xs={12} sm={12} md={12} lg={12} xl={12}>
+        <Paper style={{width: 'calc(100vw - 40px)'}} square>
             <ReactTable
               data={data}
               columns={columns}
               showPageSizeOptions={false}
-              defaultPageSize={8}
+              defaultPageSize={9}
               sortable
               filterable
             />
         </Paper>
-      </div>
+      </Grid>
     );
   }
 }
