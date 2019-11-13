@@ -4,8 +4,8 @@ import {
 } from 'recharts';
 import { Paper, Typography } from '@material-ui/core';
 
-import logo from '../logo.svg';
-import './Component.css'
+import logo from '../../assets/logo.svg';
+import './Line.css'
 
 export default class LineGraph extends PureComponent {
   
@@ -25,8 +25,8 @@ export default class LineGraph extends PureComponent {
           </LineChart>
         </ResponsiveContainer>
         :
-        <div className="Component-preloader-container">
-          <img src={logo} className="Component-preloader" alt="preloader" />
+        <div className="Line-preloader-container">
+          <img src={logo} className="Line-preloader" alt="preloader" />
           <Typography variant='h6'>Loading...</Typography>
         </div>
         }

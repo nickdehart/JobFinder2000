@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { Modal, Button, Paper } from '@material-ui/core';
-import CoverLetter from './CoverLetter.js';
 import axios from "axios";
-import QuestionModal from './QuestionModal.js';
+
+import Editor from '../editor';
+import Question from '../question';
 
 export default function DetailModal({props, getData}) {
   const [open, setOpen] = React.useState(false);
@@ -77,9 +78,9 @@ export default function DetailModal({props, getData}) {
                 </b>
               </div>
             </div>
-            <CoverLetter text={props.original.cv}/>
+            <Editor text={props.original.cv}/>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-              <QuestionModal props={props} getData={getData} />
+              <Question props={props} getData={getData} />
               <Button style={{margin: '10px', backgroundColor: '#FFBB28', color: 'white'}} variant="contained" color="inherit" onClick={notInterested}>
                 Not Interested
               </Button>

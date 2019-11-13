@@ -4,8 +4,8 @@ import {
 } from 'recharts';
 import { Paper, Typography } from '@material-ui/core';
 
-import logo from '../logo.svg';
-import './Component.css'
+import logo from '../../assets/logo.svg';
+import './Pie.css'
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -51,8 +51,8 @@ export default class PieGraph extends PureComponent {
           </PieChart>
         </ResponsiveContainer>
         :
-        <div className="Component-preloader-container">
-          <img src={logo} className="Component-preloader" alt="preloader" />
+        <div className="Pie-preloader-container">
+          <img src={logo} className="Pie-preloader" alt="preloader" />
           <Typography variant='h6'>Loading...</Typography>
         </div>
         }

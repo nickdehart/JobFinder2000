@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Line from '../components/Line';
+import Bar from './Bar';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Line data={[]} />, div);
+  ReactDOM.render(<Bar data={[]} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -7,10 +7,10 @@ import { get_Tag_Data } from '../../store/reducers/tag_data';
 import { get_Time_Data } from '../../store/reducers/time_data';
 import { get_Type_Data } from '../../store/reducers/type_data';
 
-import Line from '../../components/Line.js'
-import Pie from '../../components/Pie.js'
-import Bar from '../../components/Bar.js'
-import Table from '../../components/Table.js'
+import Line from '../../components/line'
+import Pie from '../../components/pie'
+import Bar from '../../components/bar'
+import Table from '../../components/table'
 
 
 export class Home extends Component {

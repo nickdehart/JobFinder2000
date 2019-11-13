@@ -1,0 +1,23 @@
+
+  .Pie-preloader {
+   animation: Pie-preloader-spin infinite 2s linear;
+   height: 15vmin;
+   pointer-events: none;
+ }
+
+ .Pie-preloader-container {
+   position: relative;
+   top: 50%;
+   -ms-transform: translateY(-50%);
+   transform: translateY(-50%);
+ }
+ 
+ @keyframes Pie-preloader-spin {
+   from {
+     transform: rotate(0deg);
+   }
+   to {
+     transform: rotate(360deg);
+   }
+ }
+ 

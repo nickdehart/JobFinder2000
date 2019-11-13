@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import { Paper, Button } from '@material-ui/core';
-import DetailModal from './DetailModal.js';
+import Detail from '../detail';
 
 class Table extends Component {
 
@@ -103,7 +103,7 @@ render() {
    Header: ' ',
    accessor: 'href',
    maxWidth: 100,
-   Cell: props => <DetailModal props={props} getData={getData}/>
+   Cell: props => <Detail props={props} getData={getData}/>
   }, 
 ]
 

@@ -4,8 +4,8 @@ import {
 } from 'recharts';
 import { Paper, Typography } from '@material-ui/core';
 
-import logo from '../logo.svg';
-import './Component.css'
+import logo from '../../assets/logo.svg';
+import './Bar.css'
 
 export default class BarGraph extends PureComponent {
 
@@ -30,8 +30,8 @@ export default class BarGraph extends PureComponent {
             </BarChart>
          </ResponsiveContainer>
          :
-        <div className="Component-preloader-container">
-          <img src={logo} className="Component-preloader" alt="preloader" />
+        <div className="Bar-preloader-container">
+          <img src={logo} className="Bar-preloader" alt="preloader" />
           <Typography variant='h6'>Loading...</Typography>
         </div>
         }

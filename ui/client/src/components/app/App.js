@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
-import store from './store/index';
+import store from '../../store/index';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import './App.css'
-import logo from './logo.svg';
-
-import Home from './pages/Home/index.js';
+import logo from '../../assets/logo.svg';
+import Home from '../../routes/home';
 
 
 class App extends Component {

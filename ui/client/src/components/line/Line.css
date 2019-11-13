@@ -1,18 +1,18 @@
 
-  .Component-preloader {
-   animation: Component-preloader-spin infinite 2s linear;
+  .Line-preloader {
+   animation: Line-preloader-spin infinite 2s linear;
    height: 15vmin;
    pointer-events: none;
  }
 
- .Component-preloader-container {
+ .Line-preloader-container {
    position: relative;
    top: 50%;
    -ms-transform: translateY(-50%);
    transform: translateY(-50%);
  }
  
- @keyframes Component-preloader-spin {
+ @keyframes Line-preloader-spin {
    from {
      transform: rotate(0deg);
    }
