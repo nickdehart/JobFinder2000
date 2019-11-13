@@ -2,7 +2,10 @@ import React, { PureComponent } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Label
 } from 'recharts';
-import Paper from '@material-ui/core/Paper';
+import { Paper, Typography } from '@material-ui/core';
+
+import logo from '../logo.svg';
+import './Component.css'
 
 export default class BarGraph extends PureComponent {
 
@@ -10,6 +13,7 @@ export default class BarGraph extends PureComponent {
     const { data } = this.props;
     return (
       <Paper style={{width: '30%', height: '25vh', padding: '20px'}} square>
+        {data.length > 0 ?
          <ResponsiveContainer>
             <BarChart
             data={data.slice(0, 10)}
@@ -25,6 +29,12 @@ export default class BarGraph extends PureComponent {
                <Bar dataKey="count" fill="#82ca9d" isAnimationActive={false}/>
             </BarChart>
          </ResponsiveContainer>
+         :
+        <div className="Component-preloader-container">
+          <img src={logo} className="Component-preloader" alt="preloader" />
+          <Typography variant='h6'>Loading...</Typography>
+        </div>
+        }
       </Paper>
     );
   }

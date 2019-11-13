@@ -110,14 +110,14 @@ render() {
     return (
       <div>
         <Paper style={{marginTop: '20px'}} square>
-          <ReactTable
-            data={data}
-            columns={columns}
-            showPageSizeOptions={false}
-            defaultPageSize={8}
-            sortable
-            filterable
-          />
+            <ReactTable
+              data={data}
+              columns={columns}
+              showPageSizeOptions={false}
+              defaultPageSize={8}
+              sortable
+              filterable
+            />
         </Paper>
       </div>
     );

@@ -2,7 +2,10 @@ import React, { PureComponent } from 'react';
 import {
   LineChart, Line, ResponsiveContainer, Tooltip, XAxis, Label
 } from 'recharts';
-import Paper from '@material-ui/core/Paper';
+import { Paper, Typography } from '@material-ui/core';
+
+import logo from '../logo.svg';
+import './Component.css'
 
 export default class LineGraph extends PureComponent {
   
@@ -11,7 +14,8 @@ export default class LineGraph extends PureComponent {
 
     return (
       <Paper style={{width: '30%', height: '25vh', padding: '20px'}} square>
-        <ResponsiveContainer>
+        {data.length > 0 ?
+          <ResponsiveContainer>
           <LineChart data={data}>
             <Line isAnimationActive={false} type="monotone" dataKey="count" stroke="#8884d8" strokeWidth={2} />
             <XAxis dataKey="date2"  >
@@ -20,6 +24,12 @@ export default class LineGraph extends PureComponent {
             <Tooltip />
           </LineChart>
         </ResponsiveContainer>
+        :
+        <div className="Component-preloader-container">
+          <img src={logo} className="Component-preloader" alt="preloader" />
+          <Typography variant='h6'>Loading...</Typography>
+        </div>
+        }
       </Paper>
     );
   }

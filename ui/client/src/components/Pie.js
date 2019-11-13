@@ -2,7 +2,10 @@ import React, { PureComponent } from 'react';
 import {
   PieChart, Pie, ResponsiveContainer, Tooltip, Cell, Legend
 } from 'recharts';
-import Paper from '@material-ui/core/Paper';
+import { Paper, Typography } from '@material-ui/core';
+
+import logo from '../logo.svg';
+import './Component.css'
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -28,6 +31,7 @@ export default class PieGraph extends PureComponent {
 
     return (
       <Paper style={{width: '30%', height: '25vh', padding: '20px'}} square>
+        {data.length > 0 ?
         <ResponsiveContainer>
           <PieChart>
             <Pie
@@ -46,6 +50,12 @@ export default class PieGraph extends PureComponent {
             <Legend layout="vertical" align="right" />
           </PieChart>
         </ResponsiveContainer>
+        :
+        <div className="Component-preloader-container">
+          <img src={logo} className="Component-preloader" alt="preloader" />
+          <Typography variant='h6'>Loading...</Typography>
+        </div>
+        }
       </Paper>
     );
   }
